@@ -1,0 +1,112 @@
+{
+  "Employee": [
+    {
+      "_id": "-K5W9B5PtuqN3eOVemge-VDGCFP55",
+      "name": "Naomi Norris",
+      "email": "naomi@foobar.com",
+      "birthDate": {
+        "_type": "DateInfo",
+        "month": "JAN", "day": 1, "year": 1980
+      },
+      "employmentStartDate": {
+        "_type": "DateInfo",
+        "month": "SEP", "day": 1, "year": 2014
+      },
+      "reviews": ["A", "B", "A", "A", "A", "A"]
+    },
+    {
+      "_id": "-K5WGtpGz8Y7uHDKEIzz-VDGCFP55",
+      "name": "Shay Daniels",
+      "email": "shay@foobar.com",
+      "birthDate": {
+        "_type": "DateInfo",
+        "month": "FEB", "day": 2, "year": 1981
+      },
+      "employmentStartDate": {
+        "_type": "DateInfo",
+        "month": "JAN", "day": 1, "year": 2015
+      },
+      "reviews": ["A", "B", "C"]
+    },
+    {
+      "_id": "-K5WlyzVNhOW3u4Y52cd-VDGCFP55",
+      "name": "Velma Collier",
+      "email": "velma@foobar.com",
+      "birthDate": {
+        "_type": "DateInfo",
+        "month": "MAR", "day": 5, "year": 1985
+      },
+      "employmentStartDate": {
+        "_type": "DateInfo",
+        "month": "SEP", "day": 1, "year": 2015
+      },
+      "reviews": [ ]
+    }
+  ],
+  "Contractor": [
+    {
+      "_id": "-K5WmQ27-hp2l2SO6JR7-TFEKI13KFI",
+      "name": "Kane Swanson",
+      "email": "kane@foobar.com",
+      "birthDate": {
+        "_type": "DateInfo",
+        "month": "APR", "day": 1, "year": 1990
+      },
+      "contractStartDate": {
+        "_type": "DateInfo",
+        "month": "OCT", "day": 1, "year": 2015 },
+      "rates": [ 105.50, 110.25 ]
+    },
+    {
+      "_id": "-K5Wmtq_vDonjspKd-aY-TFEKI13KFI",
+      "name": "Yeo Shepard",
+      "email": "yeo@foobar.com",
+      "birthDate": {
+        "_type": "DateInfo",
+        "month": "MAY", "day": 15, "year": 1992 },
+      "contractStartDate": {
+        "_type": "DateInfo",
+        "month": "NOV", "day": 1, "year": 2015 },
+      "rates": [ 80.50 ]
+    },
+    {
+      "_id": "-K5Wn3VQfTc_r7tD81hu-TFEKI13KFI",
+      "name": "Fay Dyer",
+      "email": "fay@foobar.com",
+      "birthDate": {
+        "_type": "DateInfo",
+        "month": "JUN", "day": 20, "year": 1993 },
+      "contractStartDate": {
+        "_type": "DateInfo",
+        "month": "DEC", "day": 1, "year": 2015 },
+      "rates": [ 125 ]
+    }
+  ],
+  "Bot": [
+    {
+      "id": "-K5WooYH5qBnE3xsJfLz-SFK",
+      "model": "T-2",
+      "skynetAddress": "18.1.1.1",
+      "assemblyDate": { "month": "DEC", "day": 1, "year": 2015 },
+      "serviceStartDate": { "month": "DEC", "day": 5, "year": 2015 },
+      "maintenanceRecords": [ ]
+    },
+    {
+      "id": "-K5Woq5nUzXLWJgrpiuc-SFK",
+      "model": "T-1000",
+      "skynetAddress": "18.1.1.2",
+      "assemblyDate": {
+        "_type": "DateInfo",
+        "month": "DEC", "day": 1, "year": 2014 },
+      "serviceStartDate": {
+        "_type": "DateInfo",
+        "month": "JAN", "day": 1, "year": 2015 },
+      "maintenanceRecords": [
+        {
+          "description": "Scheduled Service",
+          "partsReplaced": ["Positronic Core", "Emergency Switch"]
+        }
+      ]
+    }
+  ]
+}

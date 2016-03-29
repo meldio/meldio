@@ -1,0 +1,44 @@
+language: node_js
+node_js:
+- '4'
+- '5'
+env:
+- CXX=g++-4.8
+services:
+- mongodb
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - mongodb-3.2-precise
+    packages:
+    - g++-4.8
+    - mongodb-org-server
+sudo: false
+before_script:
+- sleep 15
+before_install:
+- $CXX --version
+- npm config set spin false --global
+script:
+- npm run lint && npm run check && (if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then npm
+  run cover:lcov; else npm run testonly; fi)
+after_failure:
+- (cd resources; python travis_after_all.py)
+after_success:
+- (cd resources; python travis_after_all.py)
+- export $(cat resources/.to_export_back)
+- if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js;
+  fi
+deploy:
+  provider: npm
+  email: nemanja@meldio.com
+  on:
+    tags: true
+    branch: master
+    condition: $BUILD_LEADER$BUILD_AGGREGATE_STATUS = YESothers_succeeded
+  api_key:
+    secure: ZpaaYJkUkItKSS9Ic6Gfm/eu7P46BxC/uxYX/kNtVZFgB7JRRygq5WHbSCR9qeU40iKlxIN809XmN03ZoB5NaK7mAD/vKjghy2pRydWlsXBihYfhK6vl5g2fEhUwU9Tsqg+4gJ+xG91HCQuSBYqfRGzxwhapqFFa7uiCHiRIUcP0owbV4Zp4ymwoAPbHR2z+2zqCRlXexLanQe616ZDCz2FfYy7eZzTjuKZqdAcg278xZsSW4/Pc+jQBARjjU9zDiKoyuSsXH0SuT3JM/3jUZ1Kc0LLF+9A5P38pCjqC45LeZBk/0phfZe+AdtmS07unYo6fSyvHgzvf9LEycN9ky0PeCgV4wM+6wRO61UQcHJgahn2EKUA7fwtVIQvo8e2Dm1U3IXI0HGloZVTw5qpN4QW4+JX8OuJRmpATW68esNDpZNprAWFtDR/1s1Q4Mz3tFBGQgfse2+XhGJRa3Lf76lQbx8bkkW1iPT1Gm1hSzc5UZhjCeShCBxU0/2X9Oy3mD+GgGKtAmAa/9yHKFYFqF6KTEfP3fWp63dB8rdsa5DAWJLFSXSLS8VxUbnS5hj7WfKGBmqtgXkoHAU/JhkXYDVU5V4n+43k4wh33pc/xw2h/pZc3F+Vq7/2JmIFSx9lxpq/PgOBTiVR8wepA0HK4nnJqiN+/1whfu1626IGJXYQ=
+notifications:
+  slack:
+    secure: b4VWBjAd7BMzd9HIY07M2lRym7Na+igfZdxHTr9hvY1ZIjRsCYbxIVfBDk5svu1WwQWk5yKQr6njyB+BtmdRDBPA03qbEbzT2PWuFcbob3IwYBArQ4VuhTAFQFJ4FGq/QzdQBJTRQzuabR6dFp/FgXMcwEM28vSkXs+4DJblaxfchccceu+MIVd8xs5aD/DcYGHF2+PIM0abFai3icizNyTdKbm6+Cu7Aj5s/I5HiJGDswpB9b1/Yz27pZce6BFIReFu5ZY9subUKbfrnKWcU48htv+oCwunUXN5fM1umZsC6v+3FnFx/lv4nbla2og0NEQtWC1Yi56U6VWPzjpL4PTy56RTxDYWi+uvcnmbVZnrnQdszaakK9L6MIEAYI9BmGIVd49AX4umfIOaHr21EcpvfRm0PvmSuRZ7KablAVuUzUYSVxHAwKIXbdRT4ShJjLKDBDH2fBN/9WxL73ynJh2ZsQc6vecl65RubtIGTo3csJWsqImqFPF1/mtYH6iLE7Sx9ourxedQxK9lXJZZQTyqthmyOlQwt42CE6f9INQ6vYHDQ+396HEENMwEUyvHK/LQAumDX42PZLevH/tfYYi5guYL+TeIqVDHvlh0bICUZ0JcgYbbxShhmuxk0aWrQUOMgjuJMJnJmFyZhHQ4m18/c+gfmV8Qu+509gNBGYw=

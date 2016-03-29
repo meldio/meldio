@@ -1,0 +1,11 @@
+*.swp
+*~
+*.iml
+.*
+npm-debug.log
+
+node_modules
+coverage
+scripts
+lib
+src

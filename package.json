@@ -1,6 +1,12 @@
 {
   "name": "meldio",
-  "version": "0.4.9",
+  "version": "0.4.12",
+  "config": {
+    "clientVersion": "0.4.12",
+    "graphiqlVersion": "0.5.0",
+    "humaneVersion": "3.2.2",
+    "reactVersion": "0.14.7"
+  },
   "description": "Open Source GraphQL Backend For Building Delightful Mobile and Web Apps",
   "license": "AGPL-3.0",
   "author": {

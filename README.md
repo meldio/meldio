@@ -4,17 +4,31 @@ Meldio is an open source GraphQL backend for building delightful mobile and
 web apps.
 
 Meldio provides three key benefits over the existing solutions:
- * **Blazing Takeoff**. Meldio allows you to describe data elements in a few lines of intuitive schema definition language and get a powerful GraphQL endpoint with filtering, ordering, paging and aggregation queries that works great with React and Relay.
- * **Ultimate Versatility**. With Meldio, complex data mutations are defined with modern JavaScript and beautiful APIs. Mutations run entirely on the server, enabling code reuse across mobile, web and desktop and access to more than 250,000 npm packages.
- * **Flexible Security**. Meldio allows you to setup the social and password logins, then configure functional authorization to the security model most suitable for your app, whether it is ACL, role-based, attribute-based or anything in between.
 
-Need help? [Join our Slack channel ![Slack Invite Button](https://meldio-slack.herokuapp.com/badge.svg)](https://meldio-slack.herokuapp.com)
+ * **Blazing Takeoff**. Meldio allows you to describe data elements in a few
+ lines of intuitive schema definition language and get a powerful GraphQL
+ endpoint with filtering, ordering, paging and aggregation queries that works
+ great with React and Relay.
+ * **Ultimate Versatility**. With Meldio, complex data mutations are defined
+ with modern JavaScript and beautiful APIs. Mutations run entirely on the
+ server, enabling code reuse across mobile, web and desktop and access to more
+ than 250,000 npm packages.
+ * **Flexible Security**. Meldio allows you to setup the social and password
+ logins, then configure functional authorization to the security model most
+ suitable for your app, whether it is ACL, role-based, attribute-based or
+ anything in between.
+
+Need help?
+  * [Join our Slack channel](https://meldio-slack.herokuapp.com)
+  * [Ask a question on Stack Overflow](https://stackoverflow.com/questions/ask?tags=meldio)
 
 ## Installation and Setup
 
-See [our start building guide](https://www.meldio.com/start-building) for detailed instructions.
+See [our start building guide](https://www.meldio.com/start-building) for
+detailed instructions.
 
-First, we will install two Meldio dependencies, Node.js and MongoDB. Once Node.js and MongoDB are in place, Meldio setup is super simple.
+First, we will install two Meldio dependencies, Node.js and MongoDB. Once
+Node.js and MongoDB are in place, Meldio setup is super simple.
 
 #### Node.js
 
@@ -26,13 +40,16 @@ and then install NVM with the following command:
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 ```
 
-Once NVM is installed, open a new terminal window and install Node.js with the following:
+Once NVM is installed, open a new terminal window and install Node.js with the
+following:
 
 ```bash
 nvm install node && nvm alias default node
 ```
 
-This will install the latest version of Node.js and alias it as node. Open a new terminal window and confirm Node.js is set up correctly with node --version command. This should print the latest version of Node.js.
+This will install the latest version of Node.js and alias it as node. Open a
+new terminal window and confirm Node.js is set up correctly with
+`node --version` command. This should print the latest version of Node.js.
 
 #### MongoDB
 
@@ -42,7 +59,8 @@ The recommended way to install MongoDB on an OS X system is with [brew package m
 brew update && brew install mongodb
 ```
 
-It is easiest to configure the system to launch MongoDB on startup using the following commands:
+It is easiest to configure the system to launch MongoDB on startup using the
+following commands:
 
 ```bash
 ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
@@ -65,7 +83,9 @@ To install Meldio, run the following:
 npm install -g meldio
 ```
 
-If the system permissions require sudo for installing global npm modules, the command above will not work. Instead, run npm with sudo like this: `sudo npm install -g meldio`
+If the system permissions require sudo for installing global npm modules, the
+command above will not work. Instead, run npm with sudo like this:
+`sudo npm install -g meldio`
 
 ## Installation from Source
 

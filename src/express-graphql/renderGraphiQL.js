@@ -15,12 +15,14 @@ type GraphiQLData = {
   rootValue: ?Object,
 };
 
-// Current latest version of GraphiQL.
-const GRAPHIQL_VERSION = '0.5.0';
-const MELDIO_CLIENT_URL = '/static/meldio.min.js';
-const HUMANE_URL = '/static/humane.min.js';
-const HUMANE_CSS_URL = '/static/jackedup.css';
-// `//cdn.jsdelivr.net/meldio-client/${MELDIO_CLIENT_VERSION}/meldio.min.js`
+import { config as buildConfig } from '../../package';
+
+const {
+  clientVersion,
+  graphiqlVersion,
+  humaneVersion,
+  reactVersion,
+} = buildConfig;
 
 /**
  * When express-graphql receives a request which does not Accept JSON, but does
@@ -66,13 +68,13 @@ add "&raw" to the end of the URL within a browser.
       width: 100%;
     }
   </style>
-  <link href="//cdn.jsdelivr.net/graphiql/${GRAPHIQL_VERSION}/graphiql.css" rel="stylesheet" />
-  <link href="${HUMANE_CSS_URL}" rel="stylesheet" />
-  <script src="//cdn.jsdelivr.net/react/0.14.7/react.min.js"></script>
-  <script src="//cdn.jsdelivr.net/react/0.14.7/react-dom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/graphiql/${GRAPHIQL_VERSION}/graphiql.min.js"></script>
-  <script src="${MELDIO_CLIENT_URL}"></script>
-  <script src="${HUMANE_URL}"></script>
+  <link href="//cdn.jsdelivr.net/graphiql/${graphiqlVersion}/graphiql.css" rel="stylesheet" />
+  <link href="//cdn.jsdelivr.net/humane.js/${humaneVersion}/themes/jackedup.css" rel="stylesheet" />
+  <script src="//cdn.jsdelivr.net/react/${reactVersion}/react.min.js"></script>
+  <script src="//cdn.jsdelivr.net/react/${reactVersion}/react-dom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/graphiql/${graphiqlVersion}/graphiql.min.js"></script>
+  <script src="//cdn.jsdelivr.net/meldio.client.js/${clientVersion}/meldio.min.js"></script>
+  <script src="//cdn.jsdelivr.net/humane.js/${humaneVersion}/humane.min.js"></script>
 
   <style>
     * {

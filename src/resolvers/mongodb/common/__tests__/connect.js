@@ -4,6 +4,11 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { connect } from '../connect';
 import { Db } from 'mongodb';
+import {
+  parse,
+  analyzeAST,
+  validate,
+} from '../../../../schema';
 
 chai.use(chaiAsPromised);
 
@@ -18,6 +23,7 @@ describe('resolvers / mongodb / common / connect:', () => {
     const committedReads = false;
     const config = { dbConnectionUri, committedReads };
 
+
     const db = await connect(config);
     expect(db).to.be.an.instanceof(Db);
 
@@ -26,12 +32,32 @@ describe('resolvers / mongodb / common / connect:', () => {
   });
 
   it('creates required indices', async () => {
+    const schemaDef = `
+      type User implements Node @rootViewer(field: "viewer") {
+        id: ID!
+        handle: String! @rootPluralId(field: "userByHandle")
+        firstName: String
+        lastName: String
+        emails: [String]!
+        profilePictureUrl: String
+      }
+
+      type ThePathRarelyTaken implements Node {
+        id: ID!
+        foo: Int! @rootPluralId(field: "pathByFoo")
+      }
+    `;
+    const ast = parse(schemaDef);
+    const schema = analyzeAST(ast);
+    const results = validate(schema);
+    expect(results).to.have.length(0);
+
     const dbName = `ConnectTest2`;
     const dbConnectionUri = `mongodb://localhost:27017/${dbName}`;
     const committedReads = false;
     const config = { dbConnectionUri, committedReads };
 
-    const db = await connect(config);
+    const db = await connect(config, schema);
     expect(db).to.be.an.instanceof(Db);
 
     let exists = await db
@@ -42,6 +68,16 @@ describe('resolvers / mongodb / common / connect:', () => {
     exists = await db
       .collection('_AuthProvider')
       .indexExists([ '_AuthProvider_Viewer', '_AuthProvider_Provider' ]);
+    expect(exists).to.be.true;
+
+    exists = await db
+      .collection('ThePathRarelyTaken')
+      .indexExists([ '_ThePathRarelyTaken_foo_uniqueId' ]);
+    expect(exists).to.be.true;
+
+    exists = await db
+      .collection('User')
+      .indexExists([ '_User_handle_uniqueId' ]);
     expect(exists).to.be.true;
 
     await db.dropDatabase(dbName);

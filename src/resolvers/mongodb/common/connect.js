@@ -1,8 +1,9 @@
 import { MongoClient } from 'mongodb';
 import strip from '../../../jsutils/strip';
 import { MAJORITY_READ_OPTIONS } from './definitions';
+import { rootPluralIdDirectives } from '../../../schema/analyzer';
 
-export async function connect(config) {
+export async function connect(config, schema) {
   const { dbConnectionUri, committedReads } = config;
 
   const db = await MongoClient.connect(dbConnectionUri);
@@ -91,6 +92,20 @@ export async function connect(config) {
       unique: true,
     }
   ]);
+
+  // ensure there is a unique index on each root plural id field:
+  if (schema) {
+    await Promise.all(
+      rootPluralIdDirectives(schema)
+        .map(dir =>
+          db.collection(dir.parentTypeName).createIndexes([
+            {
+              name: `_${dir.parentTypeName}_${dir.parentFieldName}_uniqueId`,
+              key: { [dir.parentFieldName]: 1 },
+              unique: true,
+            }
+          ])));
+  }
 
   return db;
 }

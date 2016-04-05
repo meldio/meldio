@@ -108,7 +108,7 @@ export async function run(options, preloadedConfig, preloadedEnv) {
 
   let db;
   try {
-    db = await resolvers.connect(config);
+    db = await resolvers.connect(config, schema);
   } catch (e) {
     console.error(strip`
       | ${chalk.bgRed('Error')}${!e.meldio ? ' MongoDB connection failed:' : ''}

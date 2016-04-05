@@ -64,17 +64,17 @@ const permissions = {
 
 describe('resolvers / mongodb / common / permissionFilter:', () => {
   before(async () => {
-    db = await connect(config);
+    const ast = parse(schemaDef);
+    schema = analyzeAST(ast);
+    const results = validate(schema);
+    expect(results).to.have.length(0);
+
+    db = await connect(config, schema);
 
     db.collection('ThePathRarelyTaken').insertMany(threeIds.map((id, i) => ({
       _id: id,
       foo: i + 1,
     })));
-
-    const ast = parse(schemaDef);
-    schema = analyzeAST(ast);
-    const results = validate(schema);
-    expect(results).to.have.length(0);
   });
 
   after(async function() {

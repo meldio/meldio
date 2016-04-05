@@ -40,12 +40,12 @@ const schemaDef = `
 
 describe('resolvers / mongodb / common / context:', () => {
   before(async () => {
-    db = await connect(config);
-
     const ast = parse(schemaDef);
     schema = analyzeAST(ast);
     const results = validate(schema);
     expect(results).to.have.length(0);
+
+    db = await connect(config, schema);
   });
 
   after(async function() {
